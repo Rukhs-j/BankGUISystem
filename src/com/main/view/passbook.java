@@ -56,6 +56,8 @@ public class passbook extends javax.swing.JFrame {
         date_f = new javax.swing.JTextField();
         bal_f = new javax.swing.JTextField();
         accno_f = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        am_f = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 255, 204));
@@ -70,8 +72,8 @@ public class passbook extends javax.swing.JFrame {
         getContentPane().add(acc_f, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 36, -1, -1));
 
         print_b.setBackground(new java.awt.Color(51, 0, 51));
-        print_b.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        print_b.setForeground(new java.awt.Color(51, 102, 255));
+        print_b.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        print_b.setForeground(new java.awt.Color(153, 255, 0));
         print_b.setText("Print");
         print_b.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +130,14 @@ public class passbook extends javax.swing.JFrame {
         accno_f.setText("jTextField1");
         getContentPane().add(accno_f, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 90, -1, -1));
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("Amount");
+        jLabel9.setToolTipText("");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, -1, -1));
+
+        am_f.setText("jTextField1");
+        getContentPane().add(am_f, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -138,7 +148,7 @@ public class passbook extends javax.swing.JFrame {
             String acc_no=acc_f.getText();
             Class.forName(JDBC_DRIVER);
         connection=DriverManager.getConnection(DB_URL,USER,PASS);
-        String sql5 = "select a.account_number,a.name,a.age,a.address,t.date,"
+        String sql5 = "select a.account_number,a.name,a.age,a.address,a.balance,t.date,t.amount,"
                     + "t.balance from account_tbl a, "
                     + "transaction_tbl t where a.account_number=t.account_number and t.account_number='"+acc_no+"'";
         pst=connection.prepareStatement(sql5);
@@ -157,13 +167,55 @@ public class passbook extends javax.swing.JFrame {
            age_f.setText(age);
            String adr=rs.getString(4);
            add_f.setText(adr);
-           String date=rs.getString(5);
+           String date=rs.getString(6);
            date_f.setText(date);
-           String bal=rs.getString(6);
+           String amount=rs.getString(7);
+           am_f.setText(amount);
+           String bal=rs.getString(8);
            bal_f.setText(bal);
+           
+             PrintWriter outputfile = null;
+
+                StringBuffer sbf1 = new StringBuffer();
+                /* sbf1.append("\n*******************\n"
+                        + "Date \t\t" + 
+                         "Balance\n"+\"Amount\\t\");*/
+                ResultSet rs = connection.createStatement().executeQuery(sql5);//here resultset is used fetch data from database
+                while (rs.next()) {
+
+                    //create StringBuffer object
+                    StringBuffer sbf = new StringBuffer();
+                    name = rs.getString("a.name");
+                   
+                    sbf.append("\nAccount: " + rs.getInt("a.account_number"));
+                     sbf.append("\nName:" + rs.getString("a.name"));
+                      sbf.append("\nAge:" + rs.getString("a.age"));
+                    sbf.append("\nAddress: " + rs.getString("a.address"));
+                    sbf.append("\nBalance: " + rs.getInt("a.balance"));
+                    sbf.append("\nTransaction:");
+                    System.out.println("print data : " + sbf);
+                    sbf1.append("\n" + rs.getString("t.date"));
+                   
+                    sbf1.append("\t\t\t" + rs.getInt("t.balance"));
+                     sbf1.append("\t" + rs.getString("t.amount"));
+
+                    System.out.println("print data : " + sbf);
+                    String filename = name + ".txt";
+                    outputfile = new PrintWriter(filename);
+
+                    outputfile.append(sbf.toString());
+                    JOptionPane.showMessageDialog(this,"Successfully wrote to the file");    
+
+                   
+                }
+
+                outputfile.append(sbf1.toString());
+                outputfile.close();
                        
         }
         
+               
+                        
         }
         catch(Exception e)
         {
@@ -212,6 +264,7 @@ public class passbook extends javax.swing.JFrame {
     private javax.swing.JTextField accno_f;
     private javax.swing.JTextField add_f;
     private javax.swing.JTextField age_f;
+    private javax.swing.JTextField am_f;
     private javax.swing.JTextField bal_f;
     private javax.swing.JTextField date_f;
     private javax.swing.JLabel jLabel1;
@@ -222,6 +275,7 @@ public class passbook extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField name_f;
     private javax.swing.JButton print_b;
     // End of variables declaration//GEN-END:variables

@@ -35,8 +35,8 @@ public class MainFrame1 extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         account_item = new javax.swing.JMenuItem();
@@ -64,18 +64,19 @@ public class MainFrame1 extends javax.swing.JFrame {
         jMenuItem5.setToolTipText("");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(204, 255, 204));
-        setForeground(new java.awt.Color(204, 255, 204));
+        setBackground(new java.awt.Color(255, 153, 153));
+        setForeground(new java.awt.Color(255, 153, 153));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 0, 204));
-        jLabel1.setText("WELCOME TO BANK MANAGEMNT SYSTEM");
-        jLabel1.setToolTipText("");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 47, -1, -1));
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 0, 51));
+        jLabel2.setText("WELCOME TO BANK SYSTEM");
+        jLabel2.setToolTipText("");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/main/images/bank_img3.jpg"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 130, -1, -1));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/main/images/bank_img2.jpg"))); // NOI18N
+        jLabel1.setToolTipText("");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, -1, -1));
 
         jMenu4.setText("User");
         jMenu4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N

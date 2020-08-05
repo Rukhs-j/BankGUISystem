@@ -1,0 +1,9 @@
+
+Account: 123456
+Name:xyz
+Age:12
+Address: latur
+Balance: 2000
+Transaction:
+2020-08-04			2200	200
+2020-08-04			1800	200
